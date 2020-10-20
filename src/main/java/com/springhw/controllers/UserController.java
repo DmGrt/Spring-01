@@ -5,8 +5,10 @@ import com.springhw.models.User;
 import com.springhw.service.UserService;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
@@ -44,9 +46,7 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public UserResponseDto get(@PathVariable Long userId) {
-        return mapUserToDto(userService.listUsers().stream()
-                .filter(user -> user.getId().equals(userId))
-                .findFirst().get());
+        return mapUserToDto(userService.get(userId));
     }
 
     @GetMapping
