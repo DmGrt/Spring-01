@@ -58,7 +58,9 @@ public class UserController {
 
     private UserResponseDto mapUserToDto(User user) {
         UserResponseDto userDto = new UserResponseDto();
-        userDto.setUser(user);
+        userDto.setId(user.getId());
+        userDto.setEmail(user.getEmail());
+        userDto.setPassword(user.getPassword());
         return userDto;
     }
 }
