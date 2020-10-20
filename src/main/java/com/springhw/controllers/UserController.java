@@ -5,10 +5,8 @@ import com.springhw.models.User;
 import com.springhw.service.UserService;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -44,10 +42,10 @@ public class UserController {
         return "Users injected";
     }
 
-    @GetMapping("/get")
-    public UserResponseDto get(@RequestParam(name = "user_id") Long id) {
+    @GetMapping("/{userId}")
+    public UserResponseDto get(@PathVariable Long userId) {
         return mapUserToDto(userService.listUsers().stream()
-                .filter(user -> user.getId().equals(id))
+                .filter(user -> user.getId().equals(userId))
                 .findFirst().get());
     }
 
